@@ -6,6 +6,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.launchcode.techjobs.oo.*;
 
+import javax.naming.Name;
+
 /**
  * Created by LaunchCode
  */
@@ -25,6 +27,7 @@ public class JobTest {
 
     }
 
+
     @Test
     public void testJobConstructorSetsAllFields() {
 
@@ -33,8 +36,7 @@ public class JobTest {
        PositionType positionType = new PositionType("Quality control");
        CoreCompetency coreCompetency = new CoreCompetency("Persistence");
 
-      Job fieldJob = new Job("Product tester", new Employer("ACME"), new Location("Desert"),
-                new PositionType("Quality control"), new CoreCompetency("Persistence"));
+      Job fieldJob = new Job("Product tester", employer, location, positionType, coreCompetency);
 
         Assert.assertEquals(fieldJob.getName(), "Product tester");
         Assert.assertEquals(fieldJob.getEmployer().toString(), employer.toString());
@@ -42,6 +44,21 @@ public class JobTest {
         Assert.assertEquals(fieldJob.getPositionType().toString(), positionType.toString());
         Assert.assertEquals(fieldJob.getCoreCompetency().toString(), coreCompetency.toString());
 
+    }
+
+    @Test
+    public void testJobsForEquality() {
+        String name = "Tester";
+        Employer employer = new Employer("ACME");
+        Location location = new Location("Desert");
+        PositionType positionType = new PositionType("Quality control");
+        CoreCompetency coreCompetency = new CoreCompetency("Persistence");
+
+
+        Job firstJob = new Job("Tester", employer, location, positionType, coreCompetency);
+        Job secondJob = new Job("Tester", employer, location, positionType, coreCompetency);
+
+        Assert.assertFalse(firstJob.equals(secondJob));
     }
 }
 
